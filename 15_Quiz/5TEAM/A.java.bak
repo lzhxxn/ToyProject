@@ -1,0 +1,155 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.*;
+
+class A extends JFrame  /*implements ActionListener*/{
+	Container cp;
+	JPanel pN, pN2, pS, pC;
+	JButton sLb, qLb;         // score time
+	JLabel tLb;
+	JButton oBtn, xBtn, pBtn;   // o x pass
+	JButton mBtn, rBtn, eBtn;   // music return exit
+	ImageIcon Close, Music, O, X, Re, timer;
+	ImageIcon main;
+	
+	
+
+
+	void init(){
+		
+
+		loadImg();
+		setButton();
+		
+		
+		setUI();
+	}
+
+	void setButton(){
+		//Image timerImage = timer.getImage();
+		//Image newTimer = timerImage.getScaledInstance(160, 100, Image.SCALE_SMOOTH);
+		//ImageIcon realTimer = new ImageIcon(newTimer);
+
+		
+		pN = new JPanel();
+		pN2 = new JPanel();
+		pS = new JPanel();
+		pC = new JPanel();
+		sLb = new JButton("SCORE"); // 점수
+		tLb = new JLabel(timer); // 시간
+		qLb = new JButton(main); // quiz
+		oBtn = new JButton(O); // o Button
+		xBtn = new JButton(X); // x Button
+		pBtn = new JButton("pass"); // pass Button
+		mBtn = new JButton(Music); // music Button
+		rBtn = new JButton(Re); // return Button
+		eBtn = new JButton(Close); // exit Button
+
+		
+
+		sLb.setBackground(Color.white);
+		tLb.setBackground(Color.white);
+		qLb.setBackground(Color.white);
+		oBtn.setBackground(Color.white);
+		xBtn.setBackground(Color.white);
+		pBtn.setBackground(Color.white);
+		mBtn.setBackground(Color.white);
+		rBtn.setBackground(Color.white);
+		eBtn.setBackground(Color.white);
+
+
+		cp = getContentPane();
+		cp.setLayout(new BorderLayout());
+		pS.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 0));
+
+		pS.setBorder(BorderFactory.createEmptyBorder(10,10,80,10));
+		pN.setBorder(BorderFactory.createEmptyBorder(40,10,10,10));
+		pC.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+		//크기조절
+		oBtn.setPreferredSize(new Dimension(80, 80)); 
+		xBtn.setPreferredSize(new Dimension(80, 80));
+		pBtn.setPreferredSize(new Dimension(80, 80));
+		tLb.setPreferredSize(new Dimension(160, 100));
+		qLb.setPreferredSize(new Dimension(460, 200));
+
+		// x y 가로 세로
+		mBtn.setBounds(700, 30, 70, 70);
+		cp.add(mBtn);
+		rBtn.setBounds(790, 30, 70, 70);
+		cp.add(rBtn);
+		eBtn.setBounds(880, 30, 70, 70);
+		cp.add(eBtn);
+		sLb.setBounds(90, 30, 120, 60);
+		cp.add(sLb);
+
+		cp.add(pN, BorderLayout.NORTH);
+
+		pN.add(tLb);
+
+
+
+		cp.add(pS, BorderLayout.SOUTH);
+		pS.add(oBtn);
+		pS.add(pBtn);
+		pS.add(xBtn);
+
+
+
+		cp.add(pC, BorderLayout.CENTER);
+		pC.add(qLb);
+
+		//cpc.add(qLb);
+		//cpc.add(pC, BorderLayout.CENTER);
+		//pC.add(cpc);
+	}
+
+	void loadImg(){
+		try{
+			
+			main = new ImageIcon(ImageIO.read(new File("KakaoTalk_20201122_142336282.png")));
+			Close = new ImageIcon(ImageIO.read(new File("remove.png")));
+			Music = new ImageIcon(ImageIO.read(new File("free-icon-musical-notes-2907253.png")));
+			O = new ImageIcon(ImageIO.read(new File("019-tick.png")));
+			Re = new ImageIcon(ImageIO.read(new File("undo.png")));
+			timer = new ImageIcon(getClass().getResource("timer_orange.gif"));
+			X = new ImageIcon(ImageIO.read(new File("026-wrong.png")));
+			
+			
+		}catch(IOException ie){
+        System.out.println("ie: " + ie);
+	
+		}
+	}
+
+    void setUI(){
+		setTitle("Quiz");
+		pack();
+		setSize(1000, 600);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+   //public void actionPerformed(ActionEvent e){
+   
+   //}
+
+	public static void main(String[] args){
+		A a = new A();
+		a.init();
+      
+    }
+}
+
+
+//jBtn.setBackground(Color.GREEN);
+//jBtn.setBorder(BorderFactory.createCompoundBorder(
+//               BorderFactory.createLineBorder(Color.CYAN, 5),
+//               BorderFactory.createLineBorder(Color.BLACK, 20)));
